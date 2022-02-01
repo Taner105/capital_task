@@ -26,7 +26,9 @@ const Main = () => {
     //         .catch(error => console.log(error))
     // }, []);
 
-    // const filteredCapital = posts.filter(post => post.toLowerCase().includes(searchCapital.toLowerCase()))
+    const filteredCapital = () => {
+        posts.blogs.filter(post => post.capital.toLowerCase().includes(searchCapital.toLowerCase()))
+    }
     return (
         <div>
             <ReactBootStrap.InputGroup className="mb-3" >
@@ -56,13 +58,13 @@ const Main = () => {
                 </thead>
                 <tbody>
                     {
-                        posts.blogs && posts.blogs.map((item) => (
+                        filteredCapital.blogs && filteredCapital.blogs.map((item) => (
                             <tr key={item.id}>
 
-                                <td>{item.name}</td>
-                                <td>{item.capital}</td>
-                                <td>{item.region}</td>
-                                <td><img style={{ width: "180px", height: "90px" }} src={item.flag} alt="flag" /></td>
+                                <td>{item.blogs.name}</td>
+                                <td>{item.blogs.capital}</td>
+                                <td>{item.blogs.region}</td>
+                                <td><img style={{ width: "180px", height: "90px" }} src={item.blogs.flag} alt="flag" /></td>
                             </tr>
 
                         ))
