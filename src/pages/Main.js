@@ -7,8 +7,6 @@ const Main = () => {
     const [posts, setPosts] = useState({ blogs: [] })
     // console.log(posts);
     const [searchCapital, setSearchCapital] = useState("")
-    const [dataSource, setDataSource] = useState()
-    const [tableFilter, setTableFilter] = useState([])
 
     useEffect(() => {
         const postList = async () => {
@@ -29,19 +27,6 @@ const Main = () => {
     // }, []);
 
     // const filteredCapital = posts.filter(post => post.toLowerCase().includes(searchCapital.toLowerCase()))
-
-    const filterData = (e) => {
-        if (e.target.value != "") {
-            setSearchCapital(e.target.value)
-            const filterTable = dataSource.filter(x => Object.keys(x).some(y => String(x[y]).toLowerCase().includes(e.target.value.toLowerCase())));
-            setTableFilter([...filterTable])
-        }
-        else {
-            setSearchCapital(e.target.value)
-            setDataSource([...dataSource])
-        }
-
-    }
     return (
         <div>
             <ReactBootStrap.InputGroup className="mb-3" >
@@ -51,7 +36,7 @@ const Main = () => {
                     aria-describedby="basic-addon2"
                     type="search"
                     value={searchCapital}
-                    onChange={filterData}
+                    onChange={(e) => setSearchCapital(e.target.value)}
                 />
                 <ReactBootStrap.Button variant="outline-secondary" id="button-addon2">
                     Button
@@ -71,7 +56,7 @@ const Main = () => {
                 </thead>
                 <tbody>
                     {
-                        searchCapital.length > 0 ? tableFilter.map((item) => (
+                        posts.blogs && posts.blogs.map((item) => (
                             <tr key={item.id}>
 
                                 <td>{item.name}</td>
@@ -80,18 +65,7 @@ const Main = () => {
                                 <td><img style={{ width: "180px", height: "90px" }} src={item.flag} alt="flag" /></td>
                             </tr>
 
-                        )) :
-                            dataSource.map((item) => (
-                                <tr key={item.id}>
-
-                                    <td>{item.name}</td>
-                                    <td>{item.capital}</td>
-                                    <td>{item.region}</td>
-                                    <td><img style={{ width: "180px", height: "90px" }} src={item.flag} alt="flag" /></td>
-                                </tr>
-                            ))
-
-
+                        ))
                     }
 
 
