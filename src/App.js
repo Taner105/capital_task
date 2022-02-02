@@ -1,13 +1,11 @@
 import './App.css';
-import AuthContextProvider from './context/AuthContext';
-import AppRouter from './router/AppRouter';
+import Main from './pages/Main';
+
 
 function App() {
   return (
     <div className="App">
-      <AuthContextProvider>
-        <AppRouter />
-      </AuthContextProvider>
+      <Main />
     </div>
   );
 }

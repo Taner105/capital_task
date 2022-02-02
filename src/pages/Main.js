@@ -7,24 +7,32 @@ const Main = () => {
     const [posts, setPosts] = useState([])
     // console.log(posts);
     const [searchCapital, setSearchCapital] = useState("")
+    console.log(searchCapital);
 
     // useEffect(() => {
     //     const postList = async () => {
-    //         const { data } = await axios("https://restcountries.com/v2/all")
+    //         const { data } = await axios(`https://restcountries.com/v2/all`)
     //         setPosts({ blogs: data })
     //         console.log(data);
     //     }
     //     postList()
     // }, [setPosts])
 
-    useEffect(() => {
-        axios.get("https://restcountries.com/v2/all")
+    const loadRecords = async () => {
+        await axios.get(`https://restcountries.com/v2/all`)
             .then(res => {
                 setPosts(res.data)
                 console.log(res.data);
             })
             .catch(error => console.log(error))
+    }
+    useEffect(() => {
+        loadRecords();
     }, []);
+
+    const handleChange = (e) => {
+        setSearchCapital(e.target.value);
+    };
 
     // const filteredCapital = () => {
     //     posts.blogs.filter(post => post.capital.toLowerCase().includes(searchCapital.toLowerCase()))
@@ -33,19 +41,20 @@ const Main = () => {
         <div>
             <ReactBootStrap.InputGroup className="mb-3" >
                 <ReactBootStrap.FormControl
-                    placeholder="Search a Country..."
+                    placeholder="Search a Capital..."
                     aria-label="Recipient's username"
                     aria-describedby="basic-addon2"
-                    type="search"
-                    // value={searchCapital}
-                    onChange={(e) => setSearchCapital(e.target.value)}
+                    type="text"
+                    value={searchCapital}
+                    // onChange={(e) => setSearchCapital(e.target.value)}
+                    onChange={handleChange}
                 />
-                <ReactBootStrap.Button variant="outline-secondary" id="button-addon2">
+                {/* <ReactBootStrap.Button variant="outline-secondary" id="button-addon2">
                     Button
-                </ReactBootStrap.Button>
+                </ReactBootStrap.Button> */}
             </ReactBootStrap.InputGroup>
 
-            <ReactBootStrap.Table striped bordered hover>
+            <ReactBootStrap.Table striped bordered hover variant="dark">
                 <thead>
                     <tr>
 
@@ -57,15 +66,14 @@ const Main = () => {
                 </thead>
                 <tbody>
                     {
-                        posts.filter((item) => {
-                            if (searchCapital == "") {
-                                return item
-                            }
-                            else if (item[0][0].capital.toLowerCase().includes(searchCapital.toLowerCase())) {
-                                return item
-                            }
-                        }).map((item, index) => (
-                            <tr key={index}>
+                        posts?.filter((item) => (
+
+                            item.capital?.toLowerCase().includes(searchCapital?.toLowerCase()))
+
+
+
+                        ).map((item, index) => (
+                            <tr className="table-country" key={index}>
 
                                 <td>{item.name}</td>
                                 <td>{item.capital}</td>
