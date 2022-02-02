@@ -3,23 +3,10 @@ import axios from "axios";
 import * as ReactBootStrap from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const Main = () => {
-    const navigate = useNavigate();
-
+const General = () => {
+    const navigate = useNavigate()
     const [posts, setPosts] = useState([])
-    // console.log(posts);
     const [searchCapital, setSearchCapital] = useState("")
-    console.log(searchCapital);
-
-    // useEffect(() => {
-    //     const postList = async () => {
-    //         const { data } = await axios(`https://restcountries.com/v2/all`)
-    //         setPosts({ blogs: data })
-    //         console.log(data);
-    //     }
-    //     postList()
-    // }, [setPosts])
-
     const loadRecords = async () => {
         await axios.get(`https://restcountries.com/v2/all`)
             .then(res => {
@@ -35,23 +22,19 @@ const Main = () => {
     const handleChange = (e) => {
         setSearchCapital(e.target.value);
     };
-
-    // const filteredCapital = () => {
-    //     posts.blogs.filter(post => post.capital.toLowerCase().includes(searchCapital.toLowerCase()))
-    // }
     return (
         <div>
             <ReactBootStrap.ButtonToolbar aria-label="Toolbar with button groups">
                 <ReactBootStrap.ButtonGroup className="me-2 m-2" aria-label="First group">
                     <ReactBootStrap.Button onClick={() => navigate("/")} className="m-2">Capital Search</ReactBootStrap.Button>
-                    <ReactBootStrap.Button onClick={() => navigate("/general")} className="m-2">General Search</ReactBootStrap.Button>
+                    <ReactBootStrap.Button className="m-2">Genereal Search</ReactBootStrap.Button>
                 </ReactBootStrap.ButtonGroup>
 
             </ReactBootStrap.ButtonToolbar>
 
             <ReactBootStrap.InputGroup className="mb-3" >
                 <ReactBootStrap.FormControl
-                    placeholder="Search a Capital..."
+                    placeholder="Search a General..."
                     aria-label="Recipient's username"
                     aria-describedby="basic-addon2"
                     type="text"
@@ -77,6 +60,9 @@ const Main = () => {
                 <tbody>
                     {
                         posts?.filter((item) => (
+
+                            item.region?.toLowerCase().includes(searchCapital.toLowerCase()) ||
+                            item.name?.toLowerCase().includes(searchCapital.toLowerCase()) ||
                             item.capital?.toLowerCase().includes(searchCapital.toLowerCase())
 
                         )).map((item, index) => (
@@ -94,9 +80,8 @@ const Main = () => {
 
                 </tbody>
             </ReactBootStrap.Table>
-
         </div>
 
     )
 }
-export default Main;
+export default General;
