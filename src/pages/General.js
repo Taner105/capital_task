@@ -23,11 +23,13 @@ const General = () => {
         setSearchCapital(e.target.value);
     };
     return (
+
         <div>
+            <h1>COUNTRY INFORMATION</h1>
             <ReactBootStrap.ButtonToolbar aria-label="Toolbar with button groups">
                 <ReactBootStrap.ButtonGroup className="me-2 m-2" aria-label="First group">
                     <ReactBootStrap.Button onClick={() => navigate("/")} className="m-2">Capital Search</ReactBootStrap.Button>
-                    <ReactBootStrap.Button className="m-2">Genereal Search</ReactBootStrap.Button>
+                    <ReactBootStrap.Button className="m-2">General Search</ReactBootStrap.Button>
                 </ReactBootStrap.ButtonGroup>
 
             </ReactBootStrap.ButtonToolbar>
@@ -66,7 +68,7 @@ const General = () => {
                             item.capital?.toLowerCase().includes(searchCapital.toLowerCase())
 
                         )).map((item, index) => (
-                            <tr className="table-country" key={index}>
+                            <tr className="table-country align-middle" key={index}>
 
                                 <td>{item.name}</td>
                                 <td>{item.capital}</td>

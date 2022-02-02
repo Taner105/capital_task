@@ -36,11 +36,9 @@ const Main = () => {
         setSearchCapital(e.target.value);
     };
 
-    // const filteredCapital = () => {
-    //     posts.blogs.filter(post => post.capital.toLowerCase().includes(searchCapital.toLowerCase()))
-    // }
     return (
         <div>
+            <h1>COUNTRY INFORMATION</h1>
             <ReactBootStrap.ButtonToolbar aria-label="Toolbar with button groups">
                 <ReactBootStrap.ButtonGroup className="me-2 m-2" aria-label="First group">
                     <ReactBootStrap.Button onClick={() => navigate("/")} className="m-2">Capital Search</ReactBootStrap.Button>
@@ -49,19 +47,17 @@ const Main = () => {
 
             </ReactBootStrap.ButtonToolbar>
 
-            <ReactBootStrap.InputGroup className="mb-3" >
+            <ReactBootStrap.InputGroup className="mb-3 " >
                 <ReactBootStrap.FormControl
                     placeholder="Search a Capital..."
                     aria-label="Recipient's username"
                     aria-describedby="basic-addon2"
                     type="text"
                     value={searchCapital}
-                    // onChange={(e) => setSearchCapital(e.target.value)}
+
                     onChange={handleChange}
                 />
-                {/* <ReactBootStrap.Button variant="outline-secondary" id="button-addon2">
-                    Button
-                </ReactBootStrap.Button> */}
+
             </ReactBootStrap.InputGroup>
 
             <ReactBootStrap.Table striped bordered hover variant="dark">
@@ -80,7 +76,7 @@ const Main = () => {
                             item.capital?.toLowerCase().includes(searchCapital.toLowerCase())
 
                         )).map((item, index) => (
-                            <tr className="table-country" key={index}>
+                            <tr className="table-country align-middle" key={index}>
 
                                 <td>{item.name}</td>
                                 <td>{item.capital}</td>
